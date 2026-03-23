@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npx nuxt build",
+  "devCommand":   "npx nuxt dev",
+  "framework":    "nuxtjs",
+  "outputDirectory": ".output/public"
+}
