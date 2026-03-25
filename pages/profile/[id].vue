@@ -1,14 +1,19 @@
 <template>
   <div class="vm-page">
-    <button class="vm-back-btn" @click="router.back()">← Back</button>
-    <div v-if="!user" class="vm-info-box vm-info-box-green">Profile not found.</div>
+    <button class="vm-back-btn" @click="router.back()">← Буцах</button>
+
+    <div v-if="!user" class="vm-info-box vm-info-box-green">
+      Профайл олдсонгүй.
+    </div>
+
     <template v-else>
       <div class="vm-profile-header">
         <div class="vm-profile-cover">
           <img v-if="coverSrc" :src="coverSrc" class="vm-profile-cover-img" alt="" />
-          <button v-if="isOwn" class="vm-profile-cover-btn" @click="coverInput?.click()">📷 Change Cover</button>
+          <button v-if="isOwn" class="vm-profile-cover-btn" @click="coverInput?.click()">📷 Ковер солих</button>
           <input ref="coverInput" type="file" accept="image/*" style="display:none;" @change="onCoverChange" />
         </div>
+
         <div class="vm-profile-body">
           <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
             <div class="vm-profile-av-wrap">
@@ -19,32 +24,59 @@
               <div v-if="isOwn" class="vm-profile-av-edit" @click="avatarInput?.click()">✏️</div>
               <input ref="avatarInput" type="file" accept="image/*" style="display:none;" @change="onAvatarChange" />
             </div>
-            <NuxtLink v-if="isOwn" to="/settings" class="vm-btn vm-btn-outline vm-btn-sm" style="margin-bottom:8px;">Edit Profile</NuxtLink>
+
+            <NuxtLink v-if="isOwn" to="/settings" class="vm-btn vm-btn-outline vm-btn-sm" style="margin-bottom:8px;">
+              Профайл засах
+            </NuxtLink>
           </div>
-          <h1 class="serif" style="font-size:27px;margin-bottom:4px;letter-spacing:-.3px;">{{ user.name }}</h1>
-          <span class="vm-badge vm-badge-stone" style="margin-bottom:10px;">{{ isCompany ? 'Organization' : 'Volunteer' }}</span>
-          <p style="color:#64748B;font-size:14px;margin-bottom:22px;line-height:1.6;max-width:540px;">{{ user.bio || 'No bio yet.' }}</p>
+
+          <h1 class="serif" style="font-size:27px;margin-bottom:4px;letter-spacing:-.3px;">
+            {{ user.name }}
+          </h1>
+
+          <span class="vm-badge vm-badge-stone" style="margin-bottom:10px;">
+            {{ isCompany ? 'Байгууллага' : 'Сайн дурынхан' }}
+          </span>
+
+          <p style="color:#64748B;font-size:14px;margin-bottom:22px;line-height:1.6;max-width:540px;">
+            {{ user.bio || 'Одоогоор танилцуулга байхгүй.' }}
+          </p>
+
           <div class="vm-stat-row">
             <div class="vm-stat-box">
               <span class="vm-stat-val vm-score">{{ user.score > 0 ? user.score : '—' }}</span>
-              <span class="vm-stat-lbl">Score</span>
+              <span class="vm-stat-lbl">Оноо</span>
             </div>
+
             <template v-if="isCompany">
-              <div class="vm-stat-box"><span class="vm-stat-val">{{ user.programs }}</span><span class="vm-stat-lbl">Programs</span></div>
-              <div class="vm-stat-box"><span class="vm-stat-val">{{ (user as any).volunteers }}</span><span class="vm-stat-lbl">Volunteers</span></div>
+              <div class="vm-stat-box">
+                <span class="vm-stat-val">{{ user.programs }}</span>
+                <span class="vm-stat-lbl">Хөтөлбөр</span>
+              </div>
+              <div class="vm-stat-box">
+                <span class="vm-stat-val">{{ (user as any).volunteers }}</span>
+                <span class="vm-stat-lbl">Сайн дурынхан</span>
+              </div>
             </template>
+
             <template v-else>
-              <div class="vm-stat-box"><span class="vm-stat-val">{{ user.programs }}</span><span class="vm-stat-lbl">Programs</span></div>
-              <div class="vm-stat-box"><span class="vm-stat-val">{{ (user as any).challenges }}</span><span class="vm-stat-lbl">Challenges</span></div>
+              <div class="vm-stat-box">
+                <span class="vm-stat-val">{{ user.programs }}</span>
+                <span class="vm-stat-lbl">Хөтөлбөр</span>
+              </div>
+              <div class="vm-stat-box">
+                <span class="vm-stat-val">{{ (user as any).challenges }}</span>
+                <span class="vm-stat-lbl">Сорилт</span>
+              </div>
             </template>
           </div>
         </div>
       </div>
 
       <div class="vm-tabs">
-        <button class="vm-tab" :class="{active:tab==='activity'}" @click="tab='activity'">Activity</button>
-        <button v-if="isCompany" class="vm-tab" :class="{active:tab==='programs'}" @click="tab='programs'">Programs</button>
-        <button class="vm-tab" :class="{active:tab==='reviews'}" @click="tab='reviews'">Reviews</button>
+        <button class="vm-tab" :class="{active:tab==='activity'}" @click="tab='activity'">Үйл ажиллагаа</button>
+        <button v-if="isCompany" class="vm-tab" :class="{active:tab==='programs'}" @click="tab='programs'">Хөтөлбөрүүд</button>
+        <button class="vm-tab" :class="{active:tab==='reviews'}" @click="tab='reviews'">Сэтгэгдлүүд</button>
       </div>
 
       <div v-if="tab==='activity'" style="display:flex;flex-direction:column;gap:12px;">
@@ -67,7 +99,7 @@
             <div style="padding:20px 22px;">
               <span class="vm-badge vm-badge-green" style="margin-bottom:10px;">{{ p.category }}</span>
               <h3 class="serif" style="font-size:17px;margin-bottom:6px;">{{ p.title }}</h3>
-              <p style="font-size:13px;color:#64748B;">{{ p.date }} · {{ p.joined }}/{{ p.spots }} spots</p>
+              <p style="font-size:13px;color:#64748B;">{{ p.date }} · {{ p.joined }}/{{ p.spots }} оролцогч</p>
             </div>
           </div>
         </NuxtLink>
@@ -77,43 +109,77 @@
         <div v-for="(c,i) in sampleComments" :key="i" class="vm-comment">
           <div class="vm-avatar">{{ c.avatar }}</div>
           <div>
-            <p style="font-weight:600;font-size:13.5px;">{{ c.user }} <span style="color:#94A3B8;font-weight:400;font-size:12px;">{{ c.time }}</span></p>
-            <p style="font-size:13.5px;color:#64748B;margin-top:4px;line-height:1.6;">{{ c.text }}</p>
+            <p style="font-weight:600;font-size:13.5px;">
+              {{ c.user }} 
+              <span style="color:#94A3B8;font-weight:400;font-size:12px;">{{ c.time }}</span>
+            </p>
+            <p style="font-size:13.5px;color:#64748B;margin-top:4px;line-height:1.6;">
+              {{ c.text }}
+            </p>
           </div>
         </div>
       </div>
     </template>
   </div>
 </template>
+
 <script setup lang="ts">
 import { useAppStore, COMPANIES, VOLUNTEERS, SAMPLE_COMMENTS, CAT_COLOR } from '~/stores/app'
 import { useStars } from '~/composables/useStars'
+
 definePageMeta({ layout: 'default', middleware: 'auth' })
+
 const store  = useAppStore()
 const route  = useRoute()
 const router = useRouter()
 const stars  = useStars
+
 const id     = computed(() => route.params.id as string)
 const isMe   = computed(() => id.value === 'me')
-const user   = computed(() => isMe.value ? store.currentUser : (COMPANIES.find(c=>c.id===id.value) ?? VOLUNTEERS.find(u=>u.id===id.value) ?? null))
+
+const user   = computed(() =>
+  isMe.value
+    ? store.currentUser
+    : (COMPANIES.find(c=>c.id===id.value) ?? VOLUNTEERS.find(u=>u.id===id.value) ?? null)
+)
+
 const isOwn     = computed(() => isMe.value)
 const isCompany = computed(() => user.value?.type === 'company')
+
 const coverInput  = ref<HTMLInputElement|null>(null)
 const avatarInput = ref<HTMLInputElement|null>(null)
+
 const coverSrc  = computed(() => isMe.value ? store.currentUser?.cover ?? '' : '')
 const avatarSrc = computed(() => isMe.value ? store.currentUser?.photo ?? '' : '')
-function onCoverChange(e:Event)  { const f=(e.target as HTMLInputElement).files?.[0]; if(f){store.updateUser({cover:URL.createObjectURL(f)});store.showToast('Cover updated!')} }
-function onAvatarChange(e:Event) { const f=(e.target as HTMLInputElement).files?.[0]; if(f){store.updateUser({photo:URL.createObjectURL(f)});store.showToast('Photo updated!')} }
+
+function onCoverChange(e:Event) {
+  const f=(e.target as HTMLInputElement).files?.[0]
+  if(f){
+    store.updateUser({cover:URL.createObjectURL(f)})
+    store.showToast('Ковер шинэчлэгдлээ!')
+  }
+}
+
+function onAvatarChange(e:Event) {
+  const f=(e.target as HTMLInputElement).files?.[0]
+  if(f){
+    store.updateUser({photo:URL.createObjectURL(f)})
+    store.showToast('Зураг шинэчлэгдлээ!')
+  }
+}
+
 const tab = ref('activity')
+
 const activityItems = computed(() => isCompany.value ? [
-  {label:'Published Urban Tree Planting Drive', time:'3 days ago',  score:4.8},
-  {label:'Hosted Youth Coding Bootcamp',         time:'1 week ago',  score:4.9},
-  {label:'Completed Food Bank Logistics',        time:'2 weeks ago', score:4.7},
+  {label:'Хотын мод тарих хөтөлбөр нийтэлсэн', time:'3 хоногийн өмнө',  score:4.8},
+  {label:'Залуучуудын код бичих сургалт зохион байгуулсан', time:'1 долоо хоногийн өмнө',  score:4.9},
+  {label:'Хүнсний банкны ажилд оролцсон', time:'2 долоо хоногийн өмнө', score:4.7},
 ] : [
-  {label:'Joined Urban Tree Planting Drive',     time:'3 days ago',  score:4.8},
-  {label:'Accepted 1-Day No Plastic Challenge',  time:'1 week ago',  score:4.9},
-  {label:'Completed Elderly Companion Visit',    time:'2 weeks ago', score:4.7},
+  {label:'Хотын мод тарих хөтөлбөрт нэгдсэн', time:'3 хоногийн өмнө',  score:4.8},
+  {label:'1 өдрийн хуванцаргүй сорилтыг хүлээн авсан', time:'1 долоо хоногийн өмнө',  score:4.9},
+  {label:'Ахмадуудад туслах ажилд оролцсон', time:'2 долоо хоногийн өмнө', score:4.7},
 ])
+
 const orgPrograms    = computed(() => store.programs.filter(p=>p.org===user.value?.name))
 const sampleComments = SAMPLE_COMMENTS
 </script>
