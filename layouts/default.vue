@@ -1,12 +1,12 @@
 <template>
   <div style="min-height:100vh;background:#F5F8FA;">
 
-    <!-- ── NAV (exact match to React version) ── -->
+    <!-- ── NAV ── -->
     <nav class="vm-nav">
       <!-- Logo -->
       <NuxtLink to="/" class="vm-nav-logo">
         <span class="vm-nav-logo-dot" />
-        Volunteer Mediate
+        Unite For Good
       </NuxtLink>
 
       <!-- Center links -->
@@ -29,7 +29,7 @@
           <span v-else>{{ store.currentUser?.avatar ?? '?' }}</span>
         </div>
         <button class="vm-btn vm-btn-ghost vm-btn-sm" @click="logout">
-          Log out
+          Гарах
         </button>
       </div>
     </nav>
@@ -50,11 +50,11 @@ const router = useRouter()
 const route  = useRoute()
 
 const navLinks = [
-  { to: '/',           label: 'Home'       },
-  { to: '/programs',   label: 'Programs'   },
-  { to: '/challenges', label: 'Challenges' },
-  { to: '/directory',  label: 'Directory'  },
-  { to: '/profile/me', label: 'My Profile' },
+  { to: '/',           label: 'Нүүр' },
+  { to: '/programs',   label: 'Хөтөлбөрүүд' },
+  { to: '/challenges', label: 'Сорилтууд' },
+  { to: '/directory',  label: 'Жагсаалт' },
+  { to: '/profile/me', label: 'Миний профайл' },
 ]
 
 function isActive(to: string) {
