@@ -5,12 +5,12 @@
     <div class="vm-login-left">
       <div class="vm-login-logo">
         <span class="vm-login-logo-dot" />
-        Volunteer Mediate
+        Unite For Good
       </div>
       <div>
-        <h2 class="vm-login-headline">Make your time<br />matter.</h2>
+        <h2 class="vm-login-headline">Цагаа<br />үнэтэй өнгөрүүл.</h2>
         <p class="vm-login-sub">
-          Join thousands of volunteers and organizations creating real change in communities worldwide.
+          Дэлхий даяар бодит өөрчлөлт бүтээж буй мянга мянган сайн дурынхан болон байгууллагуудтай нэгдээрэй.
         </p>
       </div>
       <div class="vm-login-stats">
@@ -24,8 +24,8 @@
     <!-- RIGHT FORM PANEL -->
     <div class="vm-login-right">
       <div class="vm-login-form">
-        <h2>{{ isLogin ? 'Welcome back' : 'Create your account' }}</h2>
-        <p>{{ isLogin ? 'Sign in to continue your volunteer journey.' : 'Join the community today.' }}</p>
+        <h2>{{ isLogin ? 'Тавтай морилно уу' : 'Бүртгэл үүсгэх' }}</h2>
+        <p>{{ isLogin ? 'Сайн дурын аяллаа үргэлжлүүлэхийн тулд нэвтэрнэ үү.' : 'Өнөөдөр манай нийгэмлэгт нэгдээрэй.' }}</p>
 
         <!-- mode toggle -->
         <div class="vm-login-toggle">
@@ -36,14 +36,14 @@
             :class="{ active: mode === m }"
             @click="mode = m"
           >
-            {{ m === 'login' ? 'Log In' : 'Sign Up' }}
+            {{ m === 'login' ? 'Нэвтрэх' : 'Бүртгүүлэх' }}
           </button>
         </div>
 
         <!-- signup extras -->
         <template v-if="!isLogin">
           <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#64748B;margin-bottom:12px;">
-            I am joining as
+            Би дараах байдлаар нэгдэж байна
           </p>
 
           <div class="vm-role-pick">
@@ -67,24 +67,24 @@
             </div>
             <input ref="fileInput" type="file" accept="image/*" style="display:none;" @change="handlePhoto" />
             <div class="vm-av-upload-hint">
-              <strong @click="fileInput?.click()">Upload a profile photo</strong><br />
-              JPG, PNG or GIF · Optional<br />
-              <span style="font-size:11px;color:#94A3B8;">Click the circle to choose</span>
+              <strong @click="fileInput?.click()">Профайл зураг оруулах</strong><br />
+              JPG, PNG эсвэл GIF · Заавал биш<br />
+              <span style="font-size:11px;color:#94A3B8;">Дугуй дээр дарж сонгоно уу</span>
             </div>
           </div>
 
           <div class="vm-form-group">
-            <label class="vm-form-label">{{ role === 'company' ? 'Organization Name' : 'Full Name' }}</label>
-            <input class="vm-form-input" placeholder="Your name" v-model="name" />
+            <label class="vm-form-label">{{ role === 'company' ? 'Байгууллагын нэр' : 'Бүтэн нэр' }}</label>
+            <input class="vm-form-input" placeholder="Таны нэр" v-model="name" />
           </div>
         </template>
 
         <div class="vm-form-group">
-          <label class="vm-form-label">Email</label>
+          <label class="vm-form-label">И-мэйл</label>
           <input class="vm-form-input" type="email" placeholder="you@example.com" v-model="email" />
         </div>
         <div class="vm-form-group">
-          <label class="vm-form-label">Password</label>
+          <label class="vm-form-label">Нууц үг</label>
           <input class="vm-form-input" type="password" placeholder="••••••••" v-model="pw" />
         </div>
 
@@ -93,11 +93,11 @@
           style="width:100%;justify-content:center;padding:12px 20px;font-size:15px;margin-top:4px;"
           @click="submit"
         >
-          {{ isLogin ? 'Log In →' : 'Create Account →' }}
+          {{ isLogin ? 'Нэвтрэх →' : 'Бүртгэл үүсгэх →' }}
         </button>
 
         <p style="font-size:12px;color:#94A3B8;text-align:center;margin-top:20px;">
-          Demo: fill in any email and press the button.
+          Туршилт: дурын и-мэйл оруулаад товчийг дарна уу.
         </p>
       </div>
     </div>
@@ -124,13 +124,13 @@ const isLogin      = computed(() => mode.value === 'login')
 const nameInitials = computed(() => name.value.slice(0,2).toUpperCase())
 
 const stats = [
-  { val:'12K+', label:'Volunteers'    },
-  { val:'340+', label:'Programs'      },
-  { val:'80+',  label:'Organizations' },
+  { val:'12K+', label:'Сайн дурынхан' },
+  { val:'340+', label:'Хөтөлбөрүүд' },
+  { val:'80+',  label:'Байгууллагууд' },
 ]
 const roles = [
-  { val:'user',    icon:'🙋', label:'Volunteer',    sub:'Join & participate' },
-  { val:'company', icon:'🏢', label:'Organization', sub:'Create programs'    },
+  { val:'user',    icon:'🙋', label:'Сайн дурынхан', sub:'Нэгдэж оролцоно' },
+  { val:'company', icon:'🏢', label:'Байгууллага', sub:'Хөтөлбөр үүсгэнэ' },
 ]
 
 function handlePhoto(e: Event) {
@@ -150,7 +150,7 @@ function submit() {
     photo:     photoPreview.value,
     score: 0, programs: 0, challenges: 0, bio: '',
   })
-  store.showToast(`Welcome, ${store.currentUser?.name}! 🎉`)
+  store.showToast(`Тавтай морил, ${store.currentUser?.name}! 🎉`)
   router.push('/')
 }
 </script>
