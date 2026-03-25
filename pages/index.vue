@@ -3,7 +3,7 @@
 
     <!-- HERO -->
     <div class="vm-hero">
-      <span class="vm-badge vm-badge-green" style="font-size:12px;">🌿 Volunteer Mediate</span>
+      <span class="vm-badge vm-badge-green" style="font-size:12px;">🌿 Unite For Good</span>
       <h1>Connect. Volunteer.<br /><em>Make It Count.</em></h1>
       <p>Discover meaningful volunteer programs from trusted organizations, take on community challenges, and build a profile that reflects your real-world impact.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
